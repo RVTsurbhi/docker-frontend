@@ -1,0 +1,20 @@
+version: "3"
+services: #containers
+  web:
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - 3000:3000
+    volumes:
+      - /app/node_modules
+      - .:/app
+# context - from where all the files and folders are comming from which dir (in this case its current so we use .),
+# if the project is nested then mention the foldername
+
+# we mounted 2 different volumes, one to kind of bookmark or hold to the reference to node modules
+#locally inside the container
+# other to map up all our source code files on our local machine
+#into our containers directory
