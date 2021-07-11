@@ -1,0 +1,11 @@
+language: generic
+sudo: required #for super user permisssion
+services: #copy of docker running
+  - docker
+
+before_install: # build an image before
+  - docker build -t surbhirvt/docker-frontend -f Dockerfile.dev .
+
+script:
+  # - docker run surbhirvt/docker-frontend npm run test -- --coverage
+  - docker run -e CI=true surbhirvt/docker-frontend npm run test
