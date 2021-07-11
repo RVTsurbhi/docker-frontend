@@ -9,3 +9,15 @@ before_install: # build an image before
 script:
   # - docker run surbhirvt/docker-frontend npm run test -- --coverage
   - docker run -e CI=true surbhirvt/docker-frontend npm run test
+
+deploy:
+  provider: elasticbeanstalk
+  region: ap-south-1
+  app: docker-frontend # app name mentioned in elasticbeanstalk
+  env: Dockerfrontend-env # env name in elasticbeanstalk
+  bucket_name: elasticbeanstalk-ap-south-1-306942347119
+  bucket_path: "docker-frontend" #put same as app name
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+  secret_access_key: $AWS_SECRET_KEY
